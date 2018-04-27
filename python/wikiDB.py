@@ -1,11 +1,13 @@
 import wikipedia
 import pymysql
 
-newstitles = ['apples', 'china', 'usa' , 'New Zealand', 
-             'norway', 'France', 'Peru', 'Brazil', 
-             'korea', 'Greece', 'Turkey', 'Italy', 'Ireland', 
-             'japan', 'china', 'england', 'canada', 'Jamaica', 'Jordan', 
-             'apples', 'china', 'usa', 'New Zealand']
+newstitles = ['apples', 'china', 'usa', 'New Zealand',
+             'norway', 'France', 'Peru', 'Brazil',
+             'korea', 'Greece', 'Turkey', 'Italy', 'Ireland',
+             'japan', 'china', 'england', 'canada', 'Jamaica',
+             'Jordan', 'apples', 'china', 'usa', 'New Zealand']
+
+
 def get_wiki(db, lang='en', query='city', pages=10000):
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
@@ -58,7 +60,8 @@ def get_wiki(db, lang='en', query='city', pages=10000):
 
 
 def main():
-    db = pymysql.connect(host="localhost", user="ec2-user", passwd="passwrd",  db="wiki")
+    db = pymysql.connect(host="localhost", user="ec2-user", passwd="passwrd",
+                         db="wiki")
     for t in newstitles:
         get_wiki(db, lang='en', query=t, pages=10000)
     db.close()
