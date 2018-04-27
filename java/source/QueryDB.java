@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class wildCard {
+public class QueryDB {
 
     public static void main(String[] args) {
 
@@ -16,19 +16,24 @@ public class wildCard {
         String user = "wkp";
         String password = "";
 
-        String query = "SELECT Title FROM articles " + "WHERE Title LIKE ?";
-        String wild = "%" + "Washington";
+        String query = "SELECT * FROM articles";
+        int rows = Integer.parseInt(args[0]);
         try (Connection con = DriverManager.getConnection(url, user, password);
-             PreparedStatement pst = con.prepareStatement(query);) {
-             pst.setString(1, wild);
-             ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
+             PreparedStatement pst = con.prepareStatement(query);
+             ResultSet rs = pst.executeQuery()) {
+            int counter = 1;
+            while (rs.next() && counter <= rows) {
+                System.out.println("Query " + counter);
                 System.out.println(rs.getString(1));
-             }
+                // System.out.println(rs.getString(3));
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+                counter ++;
+            }
+
         } catch (SQLException ex) {
 
-            Logger lgr = Logger.getLogger(wildCard.class.getName());
+            Logger lgr = Logger.getLogger(QueryDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }

@@ -7,10 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.lang.*;
 
-
-public class reverseQuery {
+public class WildCard {
 
     public static void main(String[] args) {
 
@@ -22,23 +20,15 @@ public class reverseQuery {
         String wild = "%" + "Washington";
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement(query);) {
-            pst.setString(1, wild);
-            ResultSet rs = pst.executeQuery();
+             pst.setString(1, wild);
+             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                String[] ss = rs.getString(1).split(" ");
-                for(String s: ss){
-                    StringBuilder input1 = new StringBuilder();
-                    input1.append(s);
-                    input1 = input1.reverse();
-                    System.out.print(input1 + " ");
-                }
-                System.out.println();
-
-            }
+                System.out.println(rs.getString(1));
+             }
         } catch (SQLException ex) {
 
-            Logger lgr = Logger.getLogger(reverseQuery.class.getName());
+            Logger lgr = Logger.getLogger(WildCard.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }

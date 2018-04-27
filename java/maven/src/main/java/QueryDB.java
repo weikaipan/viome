@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class queryDB {
+public class QueryDB {
 
     public static void main(String[] args) {
 
@@ -33,7 +33,7 @@ public class queryDB {
 
         } catch (SQLException ex) {
 
-            Logger lgr = Logger.getLogger(queryDB.class.getName());
+            Logger lgr = Logger.getLogger(QueryDB.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
