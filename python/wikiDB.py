@@ -8,7 +8,7 @@ newstitles = ['apples', 'china', 'usa', 'New Zealand',
              'Jordan', 'apples', 'china', 'usa', 'New Zealand']
 
 
-def get_wiki(db, lang='en', query='city', pages=10000):
+def get_wiki(db, lang='jp', query='city', pages=10000):
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
     wikipedia.set_lang(lang)
