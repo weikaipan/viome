@@ -1,5 +1,8 @@
 package com.zetcode;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,18 +27,23 @@ public class ReverseQuery {
              PreparedStatement pst = con.prepareStatement(query);) {
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
+            try {
+                BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard_re.txt"));
+                while (rs.next()) {
+                    String[] ss = rs.getString(1).split(" ");
+                    for(String s: ss){
+                        StringBuilder input1 = new StringBuilder();
+                        input1.append(s);
+                        input1 = input1.reverse();
+                        System.out.print(input1 + " ");
+                    }
+                    System.out.println();
 
-            while (rs.next()) {
-                String[] ss = rs.getString(1).split(" ");
-                for(String s: ss){
-                    StringBuilder input1 = new StringBuilder();
-                    input1.append(s);
-                    input1 = input1.reverse();
-                    System.out.print(input1 + " ");
                 }
-                System.out.println();
-
+            } catch (IOException ioe){
+                ioe.printStackTrace();
             }
+
         } catch (SQLException ex) {
 
             Logger lgr = Logger.getLogger(ReverseQuery.class.getName());
