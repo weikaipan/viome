@@ -10,16 +10,19 @@ def wildCard(db, reverse=False):
         text_file = open("./wildCard_re.txt", "a")
     else:
         text_file = open("./wildCard.txt", "a")
-
+    k = 0
     for row in rows:
         if reverse:
             def reverse(s):
                 return ' '.join([i[::-1] for i in s])
             print(reverse(row))
-            text_file.write(reverse(row))
+            text_file.write("Content: " + str(k) + ' \n')
+            text_file.write(reverse(row) + '\n')
         else:
             print(row)
-            text_file.write(' '.join(row))
+            text_file.write("Content: " + str(k))
+            text_file.write(' '.join(row) + ' \n')
+        k += 1
 
 
 def queryDB(db):
