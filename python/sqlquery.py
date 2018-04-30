@@ -1,10 +1,14 @@
+#!/usr/bin/python
+# -*-coding:utf-8 -*-
 import pymysql
 
 
 def wildCard(db, reverse=False):
     cursor = db.cursor()
-    sql = "SELECT Title FROM articles " + "WHERE Title LIKE %s"
-    cursor.execute(sql, ("%" + "Washington"))
+    cursor.execute("SET NAMES 'utf8';")
+    unicodedata = u"江戸幕府"
+    sql = "SELECT Body FROM pages " + "WHERE Title LIKE %s"
+    cursor.execute(sql, unicodedata.encode('utf-8'))
     rows = cursor.fetchall()
     if reverse:
         text_file = open("./wildCard_re.txt", "a")
@@ -14,33 +18,46 @@ def wildCard(db, reverse=False):
     for row in rows:
         if reverse:
             def reverse(s):
-                return ' '.join([i[::-1] for i in s])
-            print(reverse(row))
+                return s[::-1]
+            print(reverse(row[0]))
             text_file.write("Content: " + str(k) + ' \n')
-            text_file.write(reverse(row) + '\n')
+            text_file.write(reverse(row[0].encode('utf-8'))+ '\n')
         else:
-            print(row)
+            print(row[0].encode('utf-8'))
             text_file.write("Content: " + str(k))
-            text_file.write(' '.join(row) + ' \n')
+            text_file.write(' '.join(row[0]).encode('utf-8') + ' \n')
         k += 1
 
 
 def queryDB(db):
+    """For query all content from db"""
+    def printunichars(row):
+        """Helper function for print utf 8 chars"""
+        print("Title:")
+        print(row[0].encode('utf-8'))
+        print("Body:")
+        print(row[1].encode('utf-8'))
+        print("Ref:")
+        print(row[2].encode('utf-8'))
+        print("Url:")
+        print(row[3].encode('utf-8'))
+        
     cursor = db.cursor()
-    sql = "SELECT * FROM articles"
+    cursor.execute("SET NAMES 'utf8';")
+    sql = "SELECT * FROM pages"
     cursor.execute(sql)
     rows = cursor.fetchall()
     for row in rows:
-        print(row)
+        printchars(row)
 
 
 def main():
-    db = pymysql.connect(host="localhost", user="wkp", passwd="",
-                         db="wiki")
+    db = pymysql.connect(host='localhost', user='wkp', passwd='',
+                         db='wiki', use_unicode=True, charset='utf8')
     print("8. Write a SQL query to allow leading wild card search on title.")
-    queryDB(db)
+    # queryDB(db)
     print("9. Write a Python Program that runs the same SQL and returns the result to a file")
-    wildCard(db)
+    # wildCard(db)
     print("10.  Write a Java Program that run the same SQL and returns the result  with each word reversed.")
     wildCard(db, reverse=True)
 

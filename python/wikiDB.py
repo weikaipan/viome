@@ -1,12 +1,13 @@
-"""Script for downloading the wikipedia pages."""
+#!/usr/bin/python
+# -*-coding:utf-8 -*-
 import wikipedia
 import pymysql
 
-newstitles = ['apples', 'china', 'usa', 'New Zealand',
-              'norway', 'France', 'Peru', 'Brazil',
-              'korea', 'Greece', 'Turkey', 'Italy', 'Ireland',
-              'japan', 'china', 'england', 'canada', 'Jamaica',
-              'Jordan', 'apples', 'china', 'usa', 'New Zealand']
+newstitles = [u'日本', u'奈良']# 'apples', 'china', 'usa', 'New Zealand',
+              # 'norway', 'France', 'Peru', 'Brazil',
+              # 'korea', 'Greece', 'Turkey', 'Italy', 'Ireland',
+              # 'japan', 'china', 'england', 'canada', 'Jamaica',
+              # 'Jordan', 'apples', 'china', 'usa', 'New Zealand']
 
 
 def get_wiki(db, lang='jp', query='city', pages=10000):
@@ -15,7 +16,7 @@ def get_wiki(db, lang='jp', query='city', pages=10000):
     cursor.execute("SET NAMES 'utf8';")
     wikipedia.set_lang(lang)
     titles = wikipedia.search(query, results=pages)
-    print("Language: {}, Query: {}".format(lang, query))
+    print("Language: {}".format(lang))
 
     counter = 0
     for t in titles:
@@ -51,7 +52,7 @@ def get_wiki(db, lang='jp', query='city', pages=10000):
             except:
                 head = 'NULL'
 
-            sql = "INSERT INTO `articles` (`Title`, `Body`, `Ref`, `URL`) \
+            sql = "INSERT INTO `pages` (`Title`, `Body`, `Ref`, `URL`) \
                    VALUES (%s, %s, %s, %s)"
             cursor.execute(sql, (head, body, ref, url))
             print("Save")
