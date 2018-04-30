@@ -1,26 +1,37 @@
-from pymongo import MongoClient
-import pymysql
+"""A script for migrating data from mysql to mongo."""
+
+from connect import connectMysql, connectMongo
+
 
 def addContent(mongo, mysql, query=1000):
+    """Fetch content from mysql, save into mongo."""
     cursor = mysql.cursor()
-    sql = "SELECT Body FROM articles LIMIT " + str(query)
+    sql = "SELECT Body FROM pages LIMIT " + str(query)
     cursor.execute(sql)
     rows = cursor.fetchall()
+
     print(len(rows))
+
     idx = 0
     content = mongo.content
+
     for row in rows:
         cid = content.insert_one({str(idx): rows[0]}).inserted_id
         print(cid)
         idx += 1
     return
+
+
 def main():
-    client = MongoClient('localhost', 27017)
-    mongo = client.Wiki
-    mysql = pymysql.connect(host="localhost", user="wkp",
-                            password="", db="wiki", charset='utf8mb4')
-    addContent(mongo, mysql, query=1000)
+    """"""
+    mongoclient = connectMongo()
+    collection = mongoclient.Wiki
+    mysql = connectMysql()
+
+    addContent(collection, mysql, query=1000)
+
     mysql.close()
-    client.close()
+    mongoclient.close()
+
 if __name__ == '__main__':
     main()

@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*-coding:utf-8 -*-
 import wikipedia
-import pymysql
+
+from connect import connectMysql
 
 newstitles = [u'日本', u'奈良']# 'apples', 'china', 'usa', 'New Zealand',
               # 'norway', 'France', 'Peru', 'Brazil',
@@ -55,7 +56,7 @@ def get_wiki(db, lang='jp', query='city', pages=10000):
             sql = "INSERT INTO `pages` (`Title`, `Body`, `Ref`, `URL`) \
                    VALUES (%s, %s, %s, %s)"
             cursor.execute(sql, (head, body, ref, url))
-            print("Save")
+            print("Saved")
             counter += 1
             db.commit()
         except wikipedia.exceptions.DisambiguationError as e:
@@ -69,9 +70,8 @@ def get_wiki(db, lang='jp', query='city', pages=10000):
 
 
 def main():
-    """Main function connecting the database"""
-    db = pymysql.connect(host='localhost', user='wkp', passwd='',
-                         db='wiki', use_unicode=True, charset='utf8')
+    """Main function connecting the database."""
+    db = connectMysql()
     for t in newstitles:
         get_wiki(db, lang='jp', query=t, pages=10000)
     db.close()
