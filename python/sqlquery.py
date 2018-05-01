@@ -45,7 +45,7 @@ def queryDB(db):
     cursor = db.cursor()
     cursor.execute("SET NAMES 'utf8';")
     print("SET NAMES utf8;")
-    sql = "SELECT * FROM pages"
+    sql = "SELECT Title FROM pages LIMIT 100"
     cursor.execute(sql)
     rows = cursor.fetchall()
     for row in rows:
