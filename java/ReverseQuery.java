@@ -29,9 +29,10 @@ public class ReverseQuery {
             ResultSet rs = pst.executeQuery();
             // queries
             String query = "SELECT Body FROM pages " + "WHERE Title LIKE ?";
-            String wild = "%" + "Washington";
+            String wild = "%" + "";
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
+            // reverse body text
             try {
                 BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard_re.txt"));
                 while (rs.next()) {
@@ -46,7 +47,9 @@ public class ReverseQuery {
 
                 }
             } catch (IOException ioe){
+
                 ioe.printStackTrace();
+                
             }
 
         } catch (SQLException ex) {

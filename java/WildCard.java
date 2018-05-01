@@ -10,8 +10,8 @@ import java.io.*;
 public class WildCard {
 
     public static void main(String[] args) {
-
-        // connection settings
+    try {
+            // connection settings
             Class.forName("com.mysql.jdbc.Driver");
             String dbName = "wiki";
             String user = "wkp";
@@ -22,12 +22,12 @@ public class WildCard {
             // connect
             Connection con = DriverManager.getConnection(jdbcUrl, user, password);
             PreparedStatement pst = con.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
             // queries
             String query = "SELECT Body FROM pages " + "WHERE Title LIKE ?";
             String wild = "%" + "Washington";
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
+
             try {
                 
                 BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard.txt"));
@@ -39,13 +39,15 @@ public class WildCard {
             } catch (IOException ioe){
 
                 ioe.printStackTrace();
-                
+
             }
 
         } catch (SQLException ex) {
 
             Logger lgr = Logger.getLogger(WildCard.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
         }
+        
     }
 }
