@@ -16,7 +16,7 @@ public class QueryDB {
         String user = "wkp";
         String password = "";
 
-        String query = "SELECT * FROM articles";
+        String query = "SELECT * FROM pages";
         int rows = Integer.parseInt(args[0]);
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement(query);

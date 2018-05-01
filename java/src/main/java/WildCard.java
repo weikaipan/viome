@@ -17,21 +17,21 @@ public class WildCard {
         String user = "wkp";
         String password = "";
 
-        String query = "SELECT Title FROM articles " + "WHERE Title LIKE ?";
+        String query = "SELECT Body FROM pages " + "WHERE Title LIKE ?";
         String wild = "%" + "Washington";
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement(query);) {
-             pst.setString(1, wild);
-             ResultSet rs = pst.executeQuery();
-             try {
-                 BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard.txt"));
-                 while (rs.next()) {
-                     System.out.println(rs.getString(1));
-                     fout.write(rs.getString(1) + '\n');
-                 }
-             } catch (IOException ioe){
-                 ioe.printStackTrace();
-             }
+            pst.setString(1, wild);
+            ResultSet rs = pst.executeQuery();
+            try {
+                BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard.txt"));
+                while (rs.next()) {
+                    System.out.println(rs.getString(1));
+                    fout.write(rs.getString(1) + '\n');
+                }
+            } catch (IOException ioe){
+                ioe.printStackTrace();
+            }
 
         } catch (SQLException ex) {
 

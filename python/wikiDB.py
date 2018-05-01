@@ -4,7 +4,7 @@ import wikipedia
 
 from connect import connectMysql
 
-newstitles = [u'日本', u'奈良']# 'apples', 'china', 'usa', 'New Zealand',
+newstitles = ['Washington']
               # 'norway', 'France', 'Peru', 'Brazil',
               # 'korea', 'Greece', 'Turkey', 'Italy', 'Ireland',
               # 'japan', 'china', 'england', 'canada', 'Jamaica',
@@ -73,7 +73,7 @@ def main():
     """Main function connecting the database."""
     db = connectMysql()
     for t in newstitles:
-        get_wiki(db, lang='jp', query=t, pages=10000)
+        get_wiki(db, lang='en', query=t, pages=10000)
     db.close()
 
 

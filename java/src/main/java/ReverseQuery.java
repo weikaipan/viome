@@ -21,7 +21,7 @@ public class ReverseQuery {
         String user = "wkp";
         String password = "";
 
-        String query = "SELECT Title FROM articles " + "WHERE Title LIKE ?";
+        String query = "SELECT Body FROM pages " + "WHERE Title LIKE ?";
         String wild = "%" + "Washington";
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement(query);) {
