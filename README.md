@@ -18,10 +18,10 @@ execute ```sh runjava.sh [lines for displaying]```, will output below queries to
 
 execute ```python sqlquery.py```, will generate txt files into ```./output```
 
-execute ```python wikiDB.py``` will search wikipedia's pages and insert them into the mysql database using wikipedia library
+execute ```python wikiDB.py``` will search wikipedia's pages and insert them into the mysql database using [wikipedia library](https://pypi.org/project/wikipedia/) 
 
 ## ./mysql
 
-execute ```sh seeMysql.sh```, will output current all titles of [wikipedia](https://pypi.org/project/wikipedia/) pages in the database.
+execute ```sh seeMysql.sh```, will output current all titles of wikipedia pages in the database.
 
 execute ```mysql -u [username] < wildCard.sql```, will get the result of wild card title containing "Washington" by default
