@@ -12,7 +12,7 @@ execute ```sh runjava.sh [lines for displaying]```, will output below queries to
 
 2. "SELECT Title FROM pages WHERE Title LIKE % + Washington"
 
-3. Reversed outpu for **2**
+3. Reversed output for **2**
 
 ## ./python
 
