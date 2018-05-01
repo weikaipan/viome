@@ -21,21 +21,17 @@ public class QueryDB {
             Connection con = DriverManager.getConnection(jdbcUrl, user, password);
 
         	// queries
-            String query = "SELECT * FROM pages";
+            String query = "SELECT * FROM pages LIMIT " + args[0];
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             
             // diplay option
-            int rows = Integer.parseInt(args[0]);
-            int counter = 1;
 
             // display qeury
-            while (rs.next() && counter <= rows) {
-                System.out.println("Query " + counter);
+            while (rs.next()) {
                 System.out.println(rs.getString(1));
                 System.out.println(rs.getString(3));
                 System.out.println(rs.getString(4));
-                counter ++;
             }
 
 
