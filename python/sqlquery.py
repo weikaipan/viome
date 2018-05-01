@@ -55,11 +55,9 @@ def queryDB(db):
 def main():
     db = pymysql.connect(host='localhost', user='wkp', passwd='',
                          db='wiki', use_unicode=True, charset='utf8')
-    print("8. Write a SQL query to allow leading wild card search on title.")
-    queryDB(db)
     print("9. Write a Python Program that runs the same SQL and returns the result to a file")
     wildCard(db)
-    print("10.  Write a Java Program that run the same SQL and returns the result  with each word reversed.")
+    print("10.  Write a Python Program that run the same SQL and returns the result  with each word reversed.")
     wildCard(db, reverse=True)
 
     db.close()
