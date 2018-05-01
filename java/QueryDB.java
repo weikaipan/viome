@@ -12,12 +12,12 @@ public class QueryDB {
 	try {
             // connection settings
             Class.forName("com.mysql.jdbc.Driver");
-        	String dbName = "wiki";
-    		String user = "wkp";
-    		String password = "";
-    		String hostname = "localhost";
-    		String port = "";
-    		String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + user + "&password=" + password;
+            String dbName = "wiki";
+            String user = "wkp";
+            String password = "";
+            String hostname = "localhost";
+            String port = "";
+            String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + user + "&password=" + password;
             Connection con = DriverManager.getConnection(jdbcUrl, user, password);
 
         	// queries
