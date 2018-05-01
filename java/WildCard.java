@@ -21,25 +21,15 @@ public class WildCard {
             String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + user + "&password=" + password;
             // connect
             Connection con = DriverManager.getConnection(jdbcUrl, user, password);
-            String query = "SELECT Body FROM pages " + "WHERE Title LIKE ?";
+            String query = "SELECT Title FROM pages " + "WHERE Title LIKE ?";
             String wild = "%" + "Washington";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
-
-            try {
                 
-                BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard.txt"));
-                while (rs.next()) {
-                    System.out.println(rs.getString(1));
-                    fout.write(rs.getString(1) + '\n');
-                }
-
-            } catch (IOException ioe){
-
-                ioe.printStackTrace();
-
-            }
+	    while (rs.next()) {
+	        System.out.println(rs.getString(1));
+	    }
 
         } catch (SQLException ex) {
 

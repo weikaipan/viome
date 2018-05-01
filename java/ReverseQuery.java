@@ -26,30 +26,25 @@ public class ReverseQuery {
             // connect
             Connection con = DriverManager.getConnection(jdbcUrl, user, password);
             // queries
-            String query = "SELECT Body FROM pages " + "WHERE Title LIKE ?";
+            String query = "SELECT Title FROM pages " + "WHERE Title LIKE ?";
             String wild = "%" + "Washington";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
             // reverse body text
-            try {
-                BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard_re.txt"));
-                while (rs.next()) {
-                    String[] ss = rs.getString(1).split(" ");
-                    for(String s: ss){
-                        StringBuilder input1 = new StringBuilder();
-                        input1.append(s);
-                        input1 = input1.reverse();
-                        System.out.print(input1 + " ");
-                    }
-                    System.out.println();
+	    while (rs.next()) {
+	        
+                String[] ss = rs.getString(1).split(" ");
+	    	for(String s: ss){
+			StringBuilder input1 = new StringBuilder();
+			input1.append(s);
+			input1 = input1.reverse();
+			System.out.print(input1 + " ");
+	    	}
+	        
+                System.out.println();
 
-                }
-            } catch (IOException ioe){
-
-                ioe.printStackTrace();
-                
-            }
+	    }
 
         } catch (SQLException ex) {
             
