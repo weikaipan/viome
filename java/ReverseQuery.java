@@ -25,11 +25,10 @@ public class ReverseQuery {
             String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + user + "&password=" + password;
             // connect
             Connection con = DriverManager.getConnection(jdbcUrl, user, password);
-            PreparedStatement pst = con.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
             // queries
             String query = "SELECT Body FROM pages " + "WHERE Title LIKE ?";
             String wild = "%" + "Washington";
+            PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
             try {
@@ -51,12 +50,12 @@ public class ReverseQuery {
 
         } catch (SQLException ex) {
             
-            Logger lgr = Logger.getLogger(QueryDB.class.getName());
+            Logger lgr = Logger.getLogger(ReverseQuery.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
         } catch (ClassNotFoundException e) { 
 
-            Logger lgr = Logger.getLogger(QueryDB.class.getName());
+            Logger lgr = Logger.getLogger(ReverseQuery.class.getName());
             lgr.log(Level.SEVERE, e.getMessage(), e);
 
         }

@@ -10,7 +10,7 @@ import java.io.*;
 public class WildCard {
 
     public static void main(String[] args) {
-
+	try {
         // connection settings
             Class.forName("com.mysql.jdbc.Driver");
             String dbName = "wiki";
@@ -21,11 +21,9 @@ public class WildCard {
             String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + user + "&password=" + password;
             // connect
             Connection con = DriverManager.getConnection(jdbcUrl, user, password);
-            PreparedStatement pst = con.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-            // queries
             String query = "SELECT Body FROM pages " + "WHERE Title LIKE ?";
             String wild = "%" + "Washington";
+            PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
             try {
@@ -46,6 +44,12 @@ public class WildCard {
 
             Logger lgr = Logger.getLogger(WildCard.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        } catch (ClassNotFoundException e) { 
+
+            Logger lgr = Logger.getLogger(WildCard.class.getName());
+            lgr.log(Level.SEVERE, e.getMessage(), e);
+
         }
     }
 }

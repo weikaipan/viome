@@ -4,7 +4,7 @@ import wikipedia
 
 from connect import connectMysql
 
-queries = ['usa']
+queries = ['Washington']
 
 
 def get_wiki(db, lang='jp', query='city', pages=10000):
@@ -57,7 +57,6 @@ def get_wiki(db, lang='jp', query='city', pages=10000):
                 titles.append(e.options)
             except:
                 print("No id matches")
-                break
             print(counter)
     return
 
