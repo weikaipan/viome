@@ -11,15 +11,14 @@ def wildCard(db, reverse=False):
     cursor.execute(sql, unicodedata.encode('utf-8'))
     rows = cursor.fetchall()
     if reverse:
-        text_file = open("./wildCard_re.txt", "a")
+        text_file = open("./output/wildCard_re.txt", "w")
     else:
-        text_file = open("./wildCard.txt", "a")
+        text_file = open("./output/wildCard.txt", "w")
     k = 0
     for row in rows:
         if reverse:
             def reverse(s):
                 return s[::-1]
-            print(reverse(row[0]))
             text_file.write("Content: " + str(k) + ' \n')
             text_file.write(reverse(row[0].encode('utf-8'))+ '\n')
         else:
