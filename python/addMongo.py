@@ -1,4 +1,6 @@
 """A script for migrating data from mysql to mongo."""
+#!/usr/bin/python
+# -*-coding:utf-8 -*-
 
 from connect import connectMysql, connectMongo
 
@@ -16,8 +18,8 @@ def addContent(mongo, mysql, query=1000):
     content = mongo.content
 
     for row in rows:
-        cid = content.insert_one({str(idx): rows[0]}).inserted_id
-        print(cid)
+        print(row[0].encode('utf-8'))
+        cid = content.insert_one({str(idx): row[0].encode('utf-8')})
         idx += 1
     return
 
