@@ -19,8 +19,9 @@ def wildCard(db, reverse=False):
         if reverse:
             def reverse(s):
                 return s[::-1]
+            print(reverse(row[0]).encode('utf-8'))
             text_file.write("Content: " + str(k) + ' \n')
-            text_file.write(reverse(row[0].encode('utf-8'))+ '\n')
+            text_file.write(reverse(row[0]).encode('utf-8')+ '\n')
         else:
             print(row[0].encode('utf-8'))
             text_file.write("Content: " + str(k))
