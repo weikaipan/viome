@@ -26,6 +26,7 @@ public class WildCard {
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
+
             try {
                 
                 BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard.txt"));
@@ -37,7 +38,7 @@ public class WildCard {
             } catch (IOException ioe){
 
                 ioe.printStackTrace();
-                
+
             }
 
         } catch (SQLException ex) {
@@ -51,5 +52,6 @@ public class WildCard {
             lgr.log(Level.SEVERE, e.getMessage(), e);
 
         }
+        
     }
 }

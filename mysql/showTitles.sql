@@ -1,2 +1,2 @@
 USE wiki
-SELECT Title FROM articles;
+SELECT Title FROM pages;

@@ -1,2 +1,2 @@
 USE wiki
-SELECT Title FROM articles WHERE Title LIKE '%law';
+SELECT Title FROM pages WHERE Title LIKE '%Washington';

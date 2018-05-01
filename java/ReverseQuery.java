@@ -31,6 +31,7 @@ public class ReverseQuery {
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, wild);
             ResultSet rs = pst.executeQuery();
+            // reverse body text
             try {
                 BufferedWriter fout = new BufferedWriter(new FileWriter("wildcard_re.txt"));
                 while (rs.next()) {
@@ -45,7 +46,9 @@ public class ReverseQuery {
 
                 }
             } catch (IOException ioe){
+
                 ioe.printStackTrace();
+                
             }
 
         } catch (SQLException ex) {

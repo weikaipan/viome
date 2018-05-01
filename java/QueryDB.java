@@ -10,6 +10,7 @@ public class QueryDB {
 
     public static void main(String[] args) {
 	try {
+            // connection settings
             Class.forName("com.mysql.jdbc.Driver");
         	String dbName = "wiki";
     		String user = "wkp";
@@ -17,21 +18,26 @@ public class QueryDB {
     		String hostname = "localhost";
     		String port = "";
     		String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + user + "&password=" + password;
-
-        	String query = "SELECT * FROM pages";
-        	int rows = Integer.parseInt(args[0]);
             Connection con = DriverManager.getConnection(jdbcUrl, user, password);
+
+        	// queries
+            String query = "SELECT * FROM pages";
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
+            
+            // diplay option
+            int rows = Integer.parseInt(args[0]);
             int counter = 1;
+
+            // display qeury
             while (rs.next() && counter <= rows) {
                 System.out.println("Query " + counter);
                 System.out.println(rs.getString(1));
-                // System.out.println(rs.getString(3));
                 System.out.println(rs.getString(3));
                 System.out.println(rs.getString(4));
                 counter ++;
             }
+
 
         } catch (SQLException ex) {
             
@@ -45,5 +51,4 @@ public class QueryDB {
 
         }
     }
-    
 }
