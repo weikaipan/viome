@@ -8,10 +8,13 @@ queries = ['usa']
 
 
 def get_wiki(db, lang='jp', query='city', pages=10000):
-    """Prepare a cursor object using cursor() method."""
+    """Get wiki pages using wikipedia library."""
+    # Connect with database.
     cursor = db.cursor()
     cursor.execute("SET NAMES 'utf8';")
     wikipedia.set_lang(lang)
+
+    # For each query, insert into database.
     for q in queries:
         titles = wikipedia.search(q, results=pages)
         print("Language: {}".format(lang))
@@ -21,6 +24,7 @@ def get_wiki(db, lang='jp', query='city', pages=10000):
             if counter == 10000:
                 print("Done")
                 return
+            # Prevent unexcpeted error for each item.
             try:
                 print("Number {} Articles".format(counter))
                 ny = wikipedia.page(t)
@@ -53,6 +57,7 @@ def get_wiki(db, lang='jp', query='city', pages=10000):
                 counter += 1
                 db.commit()
             except wikipedia.exceptions.DisambiguationError as e:
+                # Catch special exception for wikipedia lib.
                 print("Disambiuation")
                 titles.append(e.options)
             except:
