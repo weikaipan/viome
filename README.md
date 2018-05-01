@@ -6,7 +6,7 @@ The mysql database has 10619 wikipedia pages, ~4800 pages in japanese.
 
 ## ./java
 
-### execute ```sh runjava.sh [lines for displaying]```, will output below queries to ```./output/``` directory.
+execute ```sh runjava.sh [lines for displaying]```, will output below queries to ```./output/``` directory.
 
 1. "SELECT * FROM pages LIMIT [lines for displaying]"
 
@@ -16,12 +16,12 @@ The mysql database has 10619 wikipedia pages, ~4800 pages in japanese.
 
 ## ./python
 
-### execute ```python sqlquery.py```, will generate txt files into ```./output```
+execute ```python sqlquery.py```, will generate txt files into ```./output```
 
-### execute ```python wikiDB.py``` will search wikipedia's pages and insert them into the mysql database using wikipedia library
+execute ```python wikiDB.py``` will search wikipedia's pages and insert them into the mysql database using wikipedia library
 
 ## ./mysql
 
-### execute ```sh seeMysql.sh```, will output current all titles of [wikipedia](https://pypi.org/project/wikipedia/) pages in the database.
+execute ```sh seeMysql.sh```, will output current all titles of [wikipedia](https://pypi.org/project/wikipedia/) pages in the database.
 
-### execute ```mysql -u [username] < wildCard.sql```, will get the result of wild card title containing "Washington" by default
+execute ```mysql -u [username] < wildCard.sql```, will get the result of wild card title containing "Washington" by default
